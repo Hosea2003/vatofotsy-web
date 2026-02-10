@@ -135,17 +135,21 @@ export default function Features() {
 
   useGSAP(
     () => {
-      gsap.from("[data-feature]", {
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: "top 80%",
+      gsap.fromTo(
+        "[data-feature]",
+        { y: 40, autoAlpha: 0 },
+        {
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: "top 80%",
+          },
+          y: 0,
+          autoAlpha: 1,
+          duration: 0.6,
+          stagger: 0.1,
+          ease: "power3.out",
         },
-        y: 40,
-        opacity: 0,
-        duration: 0.6,
-        stagger: 0.1,
-        ease: "power3.out",
-      });
+      );
     },
     { scope: sectionRef },
   );
@@ -171,7 +175,7 @@ export default function Features() {
             <div
               key={feature.title}
               data-feature
-              className="group rounded-2xl border border-foreground/5 p-6 transition-all hover:border-primary/20 hover:bg-primary/[.02]"
+              className="invisible group rounded-2xl border border-foreground/5 p-6 transition-all hover:border-primary/20 hover:bg-primary/[.02]"
             >
               <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-primary/10 text-primary transition-colors group-hover:bg-primary/15">
                 {feature.icon}

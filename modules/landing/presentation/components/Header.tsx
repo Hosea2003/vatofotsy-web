@@ -4,6 +4,7 @@ import { useRef, useState } from "react";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import Link from "next/link";
+import ThemeToggle from "./ThemeToggle";
 
 const NAV_LINKS = [
   { href: "#features", label: "Features" },
@@ -17,12 +18,11 @@ export default function Header() {
 
   useGSAP(
     () => {
-      gsap.from(headerRef.current, {
-        y: -80,
-        opacity: 0,
-        duration: 0.8,
-        ease: "power3.out",
-      });
+      gsap.fromTo(
+        headerRef.current,
+        { y: -80, autoAlpha: 0 },
+        { y: 0, autoAlpha: 1, duration: 0.8, ease: "power3.out" },
+      );
     },
     { scope: headerRef },
   );
@@ -50,29 +50,33 @@ export default function Header() {
         </nav>
 
         <div className="hidden items-center gap-3 md:flex">
+          <ThemeToggle />
           <button className="cursor-pointer rounded-lg px-4 py-2 text-sm font-medium text-foreground/70 transition-colors hover:text-foreground">
             Sign in
           </button>
-          <button className="cursor-pointer rounded-lg bg-primary px-4 py-2 text-sm font-bold text-background transition-colors hover:bg-primary-dark">
+          <button className="cursor-pointer rounded-lg bg-primary px-4 py-2 text-sm font-bold text-white transition-colors hover:bg-primary-dark">
             Get Started Free
           </button>
         </div>
 
-        <button
-          onClick={() => setMobileOpen(!mobileOpen)}
-          className="flex cursor-pointer flex-col gap-1.5 md:hidden"
-          aria-label="Toggle menu"
-        >
-          <span
-            className={`block h-0.5 w-6 bg-foreground transition-transform ${mobileOpen ? "translate-y-2 rotate-45" : ""}`}
-          />
-          <span
-            className={`block h-0.5 w-6 bg-foreground transition-opacity ${mobileOpen ? "opacity-0" : ""}`}
-          />
-          <span
-            className={`block h-0.5 w-6 bg-foreground transition-transform ${mobileOpen ? "-translate-y-2 -rotate-45" : ""}`}
-          />
-        </button>
+        <div className="flex items-center gap-2 md:hidden">
+          <ThemeToggle />
+          <button
+            onClick={() => setMobileOpen(!mobileOpen)}
+            className="flex cursor-pointer flex-col gap-1.5"
+            aria-label="Toggle menu"
+          >
+            <span
+              className={`block h-0.5 w-6 bg-foreground transition-transform ${mobileOpen ? "translate-y-2 rotate-45" : ""}`}
+            />
+            <span
+              className={`block h-0.5 w-6 bg-foreground transition-opacity ${mobileOpen ? "opacity-0" : ""}`}
+            />
+            <span
+              className={`block h-0.5 w-6 bg-foreground transition-transform ${mobileOpen ? "-translate-y-2 -rotate-45" : ""}`}
+            />
+          </button>
+        </div>
       </div>
 
       {mobileOpen && (
@@ -92,7 +96,7 @@ export default function Header() {
             <button className="cursor-pointer text-left text-sm font-medium text-foreground/70">
               Sign in
             </button>
-            <button className="cursor-pointer rounded-lg bg-primary px-4 py-2.5 text-center text-sm font-bold text-background">
+            <button className="cursor-pointer rounded-lg bg-primary px-4 py-2.5 text-center text-sm font-bold text-white">
               Get Started Free
             </button>
           </nav>

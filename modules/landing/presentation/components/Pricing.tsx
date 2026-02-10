@@ -62,17 +62,21 @@ export default function Pricing() {
 
   useGSAP(
     () => {
-      gsap.from("[data-pricing]", {
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: "top 75%",
+      gsap.fromTo(
+        "[data-pricing]",
+        { y: 40, autoAlpha: 0 },
+        {
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: "top 75%",
+          },
+          y: 0,
+          autoAlpha: 1,
+          duration: 0.7,
+          stagger: 0.12,
+          ease: "power3.out",
         },
-        y: 40,
-        opacity: 0,
-        duration: 0.7,
-        stagger: 0.12,
-        ease: "power3.out",
-      });
+      );
     },
     { scope: sectionRef },
   );
@@ -102,14 +106,14 @@ export default function Pricing() {
             <div
               key={plan.name}
               data-pricing
-              className={`rounded-2xl border p-8 ${
+              className={`invisible rounded-2xl border p-8 ${
                 plan.highlighted
                   ? "relative border-primary bg-primary/[.03] shadow-lg shadow-primary/10"
                   : "border-foreground/10"
               }`}
             >
               {plan.highlighted && (
-                <div className="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full bg-primary px-3 py-0.5 text-xs font-bold text-background">
+                <div className="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full bg-primary px-3 py-0.5 text-xs font-bold text-white">
                   Most Popular
                 </div>
               )}
@@ -126,7 +130,7 @@ export default function Pricing() {
               <button
                 className={`mb-8 w-full cursor-pointer rounded-xl py-3 text-sm font-bold transition-colors ${
                   plan.highlighted
-                    ? "bg-primary text-background hover:bg-primary-dark"
+                    ? "bg-primary text-white hover:bg-primary-dark"
                     : "bg-foreground/5 text-foreground hover:bg-foreground/10"
                 }`}
               >

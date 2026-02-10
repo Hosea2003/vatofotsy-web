@@ -11,57 +11,39 @@ export default function Hero() {
     () => {
       const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
 
-      tl.from("[data-animate='badge']", {
-        y: 20,
-        opacity: 0,
-        duration: 0.6,
-      })
-        .from(
+      tl.fromTo(
+        "[data-animate='badge']",
+        { y: 20, autoAlpha: 0 },
+        { y: 0, autoAlpha: 1, duration: 0.6 },
+      )
+        .fromTo(
           "[data-animate='heading'] > *",
-          {
-            y: 60,
-            opacity: 0,
-            duration: 0.9,
-            stagger: 0.15,
-          },
+          { y: 60, autoAlpha: 0 },
+          { y: 0, autoAlpha: 1, duration: 0.9, stagger: 0.15 },
           "-=0.2",
         )
-        .from(
+        .fromTo(
           "[data-animate='subheading']",
-          {
-            y: 30,
-            opacity: 0,
-            duration: 0.7,
-          },
+          { y: 30, autoAlpha: 0 },
+          { y: 0, autoAlpha: 1, duration: 0.7 },
           "-=0.5",
         )
-        .from(
+        .fromTo(
           "[data-animate='cta'] > *",
-          {
-            y: 20,
-            opacity: 0,
-            duration: 0.5,
-            stagger: 0.1,
-          },
+          { y: 20, autoAlpha: 0 },
+          { y: 0, autoAlpha: 1, duration: 0.5, stagger: 0.1 },
           "-=0.3",
         )
-        .from(
+        .fromTo(
           "[data-animate='social-proof']",
-          {
-            y: 20,
-            opacity: 0,
-            duration: 0.6,
-          },
+          { y: 20, autoAlpha: 0 },
+          { y: 0, autoAlpha: 1, duration: 0.6 },
           "-=0.2",
         )
-        .from(
+        .fromTo(
           "[data-animate='preview']",
-          {
-            y: 60,
-            opacity: 0,
-            scale: 0.95,
-            duration: 1,
-          },
+          { y: 60, autoAlpha: 0, scale: 0.95 },
+          { y: 0, autoAlpha: 1, scale: 1, duration: 1 },
           "-=0.4",
         );
     },
@@ -79,7 +61,7 @@ export default function Hero() {
       <div className="mx-auto flex max-w-4xl flex-col items-center text-center">
         <div
           data-animate="badge"
-          className="mb-8 inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/5 px-4 py-1.5 text-sm font-medium text-primary-dark dark:text-primary-light"
+          className="invisible mb-8 inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/5 px-4 py-1.5 text-sm font-medium text-primary-dark dark:text-primary-light"
         >
           <span className="relative flex h-2 w-2">
             <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-primary opacity-75" />
@@ -92,13 +74,15 @@ export default function Hero() {
           data-animate="heading"
           className="mb-8 text-5xl leading-[1.1] font-extrabold tracking-tight md:text-7xl"
         >
-          <span className="block">Organize votes</span>
-          <span className="block text-primary">your community trusts</span>
+          <span className="invisible block">Organize votes</span>
+          <span className="invisible block text-primary">
+            your community trusts
+          </span>
         </h1>
 
         <p
           data-animate="subheading"
-          className="mb-10 max-w-2xl text-lg leading-relaxed text-foreground/60 md:text-xl"
+          className="invisible mb-10 max-w-2xl text-lg leading-relaxed text-foreground/60 md:text-xl"
         >
           Create public polls or private organizational votes in minutes. Invite
           your team, secure every ballot with end-to-end verification, and share
@@ -109,10 +93,10 @@ export default function Hero() {
           data-animate="cta"
           className="flex flex-col items-center gap-4 sm:flex-row"
         >
-          <button className="cursor-pointer rounded-xl bg-primary px-8 py-3.5 text-base font-bold text-background shadow-lg shadow-primary/25 transition-all hover:bg-primary-dark hover:shadow-xl hover:shadow-primary/30">
+          <button className="invisible cursor-pointer rounded-xl bg-primary px-8 py-3.5 text-base font-bold text-white shadow-lg shadow-primary/25 transition-all hover:bg-primary-dark hover:shadow-xl hover:shadow-primary/30">
             Start for Free
           </button>
-          <button className="group flex cursor-pointer items-center gap-2 rounded-xl border border-foreground/10 px-8 py-3.5 text-base font-medium transition-colors hover:bg-foreground/5">
+          <button className="invisible group flex cursor-pointer items-center gap-2 rounded-xl border border-foreground/10 px-8 py-3.5 text-base font-medium transition-colors hover:bg-foreground/5">
             Watch Demo
             <svg
               className="h-4 w-4 transition-transform group-hover:translate-x-0.5"
@@ -137,7 +121,7 @@ export default function Hero() {
 
         <div
           data-animate="social-proof"
-          className="mt-12 flex flex-col items-center gap-3"
+          className="invisible mt-12 flex flex-col items-center gap-3"
         >
           <div className="flex -space-x-2">
             {[...Array(5)].map((_, i) => (
@@ -160,7 +144,7 @@ export default function Hero() {
       {/* App preview mock */}
       <div
         data-animate="preview"
-        className="mx-auto mt-20 w-full max-w-4xl rounded-2xl border border-foreground/10 bg-foreground/[.02] p-2 shadow-2xl shadow-black/5"
+        className="invisible mx-auto mt-20 w-full max-w-4xl rounded-2xl border border-foreground/10 bg-foreground/[.02] p-2 shadow-2xl shadow-black/5"
       >
         <div className="rounded-xl border border-foreground/5 bg-background p-6 md:p-8">
           {/* Mock toolbar */}

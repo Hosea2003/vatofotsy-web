@@ -39,17 +39,21 @@ export default function HowItWorks() {
 
   useGSAP(
     () => {
-      gsap.from("[data-step]", {
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: "top 75%",
+      gsap.fromTo(
+        "[data-step]",
+        { x: -30, autoAlpha: 0 },
+        {
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: "top 75%",
+          },
+          x: 0,
+          autoAlpha: 1,
+          duration: 0.7,
+          stagger: 0.15,
+          ease: "power3.out",
         },
-        x: -30,
-        opacity: 0,
-        duration: 0.7,
-        stagger: 0.15,
-        ease: "power3.out",
-      });
+      );
     },
     { scope: sectionRef },
   );
@@ -76,7 +80,7 @@ export default function HowItWorks() {
 
         <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
           {STEPS.map((item, i) => (
-            <div key={item.step} data-step className="relative">
+            <div key={item.step} data-step className="invisible relative">
               {i < STEPS.length - 1 && (
                 <div className="absolute top-8 left-full hidden h-px w-full bg-gradient-to-r from-primary/30 to-transparent lg:block" />
               )}
